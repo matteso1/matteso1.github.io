@@ -32,17 +32,6 @@
             background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
             color: #fff;
             padding: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .asteroid {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ccc;
-            border-radius: 50%;
-            pointer-events: none;
         }
 
         .section-title {
@@ -81,7 +70,6 @@
         <div class="container text-center">
             <h1 class="display-4">Nils Matteson</h1>
             <h2 class="lead">CS Student at UW Madison</h2>
-            <div id="asteroid-container"></div>
         </div>
     </header>
 
@@ -138,44 +126,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            const asteroidContainer = document.getElementById('asteroid-container');
-            const asteroidCount = 20;
-
-            // Create asteroids
-            for (let i = 0; i < asteroidCount; i++) {
-                const asteroid = document.createElement('div');
-                asteroid.classList.add('asteroid');
-                asteroid.style.top = Math.random() * 100 + '%';
-                asteroid.style.left = Math.random() * 100 + '%';
-                asteroidContainer.appendChild(asteroid);
-            }
-
-            // React to mouse hover
-            asteroidContainer.addEventListener('mouseover', function(e) {
-                const asteroids = document.querySelectorAll('.asteroid');
-                asteroids.forEach(function(asteroid) {
-                    const dx = e.clientX - asteroid.getBoundingClientRect().left - asteroid.offsetWidth / 2;
-                    const dy = e.clientY - asteroid.getBoundingClientRect().top - asteroid.offsetHeight / 2;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const force = 50 / (distance * distance);
-                    const angle = Math.atan2(dy, dx);
-                    const xForce = force * Math.cos(angle);
-                    const yForce = force * Math.sin(angle);
-
-                    asteroid.style.transform = `translate(${xForce}px, ${yForce}px)`;
-                });
-            });
-
-            // Reset asteroids on mouseout
-            asteroidContainer.addEventListener('mouseout', function() {
-                const asteroids = document.querySelectorAll('.asteroid');
-                asteroids.forEach(function(asteroid) {
-                    asteroid.style.transform = 'none';
-                });
-            });
-        });
-    </script>
 </body>
 </html>
